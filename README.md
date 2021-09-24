@@ -2,23 +2,11 @@
 
 ## Project setup
 ```
-npm install
-```
+git clone https://github.com/NaMax66/affluent-test.git
 
-### Compiles and hot-reloads for development
-```
+go to "affluent-test" folder
+
+npm install
+
 npm run serve
 ```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
