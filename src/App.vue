@@ -1,14 +1,16 @@
 <template>
-  <Users />
+  <LayoutDefault>
+    <router-view />
+  </LayoutDefault>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import Users from "@/pages/Users.vue";
+import LayoutDefault from "@/components/LayoutDefault.vue";
 
 export default defineComponent({
   name: 'App',
-  components: { Users },
+  components: { LayoutDefault },
 });
 </script>
 
