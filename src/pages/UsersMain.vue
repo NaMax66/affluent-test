@@ -9,7 +9,7 @@ import { defineComponent } from "vue";
 import ListDefault from "@/components/ListDefault.vue"
 
 export default defineComponent({
-  name: "Users",
+  name: "UsersMainPage",
   components: { ListDefault }
 })
 </script>

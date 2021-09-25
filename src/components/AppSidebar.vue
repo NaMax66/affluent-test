@@ -2,13 +2,16 @@
   <nav>
     <ul>
       <li>
+        <router-link to="/">main</router-link>
+      </li>
+      <li>
         <router-link to="users">users</router-link>
       </li>
       <li>
-        <router-link to="users">comments</router-link>
+        <router-link to="comments">comments</router-link>
       </li>
       <li>
-        <router-link to="users">photos</router-link>
+        <router-link to="photos">photos</router-link>
       </li>
     </ul>
   </nav>
