@@ -1,10 +1,8 @@
-export type RouteName = 'mainPage' | 'users' | 'comments' | 'photos'
-
-type Routes = {[key in RouteName]: string}
-
-export const routes: Routes = {
+export const routes = {
     mainPage: '/',
     photos: '/photos',
     comments: '/comments',
     users: '/users'
-  };
+  } as const;
+
+export type RouteName = keyof typeof routes;

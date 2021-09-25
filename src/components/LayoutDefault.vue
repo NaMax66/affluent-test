@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <app-sidebar />
-    <main>
+  <div class="layout-default">
+    <navigation-sidebar />
+    <main class="main-content">
       <slot />
     </main>
   </div>
@@ -9,14 +9,20 @@
 
 <script>
 import { defineComponent } from "vue";
-import AppSidebar from "@/components/AppSidebar";
+import NavigationSidebar from "@/components/NavigationSidebar";
 
 export default defineComponent({
   name: "LayoutDefault",
-  components: { AppSidebar }
+  components: { NavigationSidebar }
 });
 </script>
 
 <style scoped>
+.layout-default {
+  display: flex;
+}
 
+.main-content {
+  margin: 1rem;
+}
 </style>
