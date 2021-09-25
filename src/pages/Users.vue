@@ -1,39 +1,52 @@
 <template>
   <div>
     <h1>Users page</h1>
-    <button @click="setUserList">set users</button>
-    <button @click="fetchUserList">fetch users</button>
-    <list-default />
+    <ul class="user-list">
+      <user-list-item v-for="user in userList" :user="user" :key="user.id" />
+    </ul>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import ListDefault from '@/components/ListDefault.vue';
-import { mapMutations, mapActions } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
+import UserListItem from '@/components/users/ListItem.vue';
+import { User } from '@/specification/DTO/users';
 
 export default defineComponent({
   name: 'UsersPage',
-  components: { ListDefault },
+  components: {
+    UserListItem
+  },
+
+  computed: {
+    ...mapGetters('users', ['getUsers']),
+    userList(): User[] {
+      return this.getUsers;
+    }
+  },
+
   methods: {
-    ...mapMutations('users', [
-        'setList'
-    ]),
     ...mapActions('users', [
         'fetchList'
     ]),
 
-    setUserList() {
-      this.setList([{id: 1, name: 'John'}]);
-    },
-
     fetchUserList() {
       this.fetchList();
+    }
+  },
+
+  created() {
+    if (!this.userList.length) {
+      this.fetchUserList();
     }
   }
 });
 </script>
 
 <style scoped>
-
+.user-list {
+  margin-top: 2rem;
+  list-style: none;
+}
 </style>
