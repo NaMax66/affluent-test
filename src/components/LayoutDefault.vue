@@ -23,6 +23,7 @@ export default defineComponent({
 }
 
 .main-content {
+  width: 100%;
   margin: 1rem;
 }
 </style>
