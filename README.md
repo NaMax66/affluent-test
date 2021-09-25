@@ -5,7 +5,7 @@
 ## Information
 
 - all changes will be tracked in [changelog]
-- the project has some `explanation` and `enhancement` keywords in comment.
+- the project has some `explanation` and `enhancement` keywords in comments.
 - Use `search by project` if you need more details.
 
 ## Project setup
