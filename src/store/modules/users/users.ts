@@ -1,42 +1,19 @@
-import { GetterTree, MutationTree, ActionTree, ActionContext } from 'vuex';
+import { GetterTree, MutationTree, ActionTree } from 'vuex';
+import { State, Getters, Mutations, Actions } from './types';
+
 import { User } from '@/specification/DTO/users';
 
-interface State {
-  list: User[]
-}
-
-interface Getters {
-  getUsers(state: State): User[];
-}
-
-interface Mutations {
-  setList(state: State, payload: User[]): void;
-}
-
-interface AugmentedActionContext extends Omit<ActionContext<State, {}>, 'commit'> {
-  commit<K extends keyof Mutations>(
-    key: K,
-    payload: Parameters<Mutations[K]>[1],
-  ): ReturnType<Mutations[K]>;
-}
-
-interface Actions {
-  fetchList(
-    { commit }: AugmentedActionContext
-  ): Promise<void>;
-}
-
 const state: State = {
-  list: []
+  userList: []
 };
 
 const getters: GetterTree<State, {}> & Getters = {
-  getUsers: (state) => state.list
+  getUsers: (state) => state.userList
 };
 
 const mutations: MutationTree<State> & Mutations = {
   setList(state: State, payload: User[]) {
-    state.list = payload;
+    state.userList = payload;
   }
 };
 
