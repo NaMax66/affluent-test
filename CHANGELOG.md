@@ -5,6 +5,13 @@ The format is based on [keepachangelog.com]
 
 [keepachangelog.com]:https://keepachangelog.com/en/1.0.0/
 
+## Unreleased
+
+### Added
+
+- style for navbar
+- `main`, `comments`, `photos` pages and routes for them
+
 ## [0.0.1] - 2021-09-25
 
 ### Added
