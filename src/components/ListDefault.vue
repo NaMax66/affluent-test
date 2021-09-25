@@ -1,5 +1,5 @@
 <template>
-  <ul>
+  <ul class="list-default">
     <li v-for="item in 5" :key="item">{{ item }}</li>
   </ul>
 </template>
@@ -13,5 +13,7 @@ export default defineComponent({
 </script>
 
 <style scoped>
-
+.list-default {
+  list-style: none;
+}
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    Photos page
+    <h1>Photos page</h1>
     <list-default />
   </div>
 </template>

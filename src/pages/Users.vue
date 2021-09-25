@@ -1,6 +1,6 @@
 <template>
   <div>
-    Users page
+    <h1>Users page</h1>
     <list-default />
   </div>
 </template>

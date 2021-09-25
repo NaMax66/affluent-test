@@ -1,6 +1,6 @@
 <template>
   <div>
-    Comments page
+    <h1>Comments page</h1>
     <list-default />
   </div>
 </template>
