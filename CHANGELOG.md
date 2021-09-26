@@ -9,6 +9,7 @@ The format is based on [keepachangelog.com]
 
 ### Added
 
+- CRUD for users page
 - style for navbar
 - `main`, `comments`, `photos` pages and routes for them
 
