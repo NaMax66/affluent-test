@@ -1,6 +1,6 @@
 <template>
   <li class="user-list-item">
-    <h3 class="user-list-item__name">{{ user.name }}</h3>
+    <h4 class="user-list-item__name">{{ user.name }}</h4>
     <button class="user-list-item__action" @click="onRemove" title="remove user">X</button>
   </li>
 </template>
@@ -28,7 +28,7 @@ export default defineComponent({
 <style scoped>
 .user-list-item {
   display: flex;
-  padding: 1rem;
+  padding: 0.5rem;
   border-radius: 2px;
 }
 

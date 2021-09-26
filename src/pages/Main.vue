@@ -23,7 +23,7 @@ export default defineComponent({
 <style scoped>
 .page-main {
   width: 100%;
-  max-width: var(--width-min-desktop);
+  max-width: var(--width-max-desktop);
   margin: 0 auto;
 }
 

@@ -35,12 +35,14 @@ export default defineComponent({
 <style scoped>
 .navigation-sidebar {
   width: 8rem;
-  height: 100vh;
+  min-height: 100vh;
   background-color: var(--c-black);
   padding: 1rem;
 }
 
 .navigation-list {
+  top: 1.5rem;
+  position: sticky;
   list-style: none;
 }
 

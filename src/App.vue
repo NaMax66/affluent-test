@@ -17,6 +17,7 @@ export default defineComponent({
 <style>
 /* todo move to file */
 :root {
+  --width-max-desktop: 1200px;
   --width-min-desktop: 1024px;
   --width-min-tablet: 768px;
 

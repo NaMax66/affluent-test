@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="page-users">
     <h1>Users page</h1>
     <div class="user-page-content">
       <ul class="user-list">
@@ -86,12 +86,17 @@ export default defineComponent({
 </script>
 
 <style scoped>
+.page-users {
+  width: 100%;
+  max-width: var(--width-max-desktop);
+  margin: 0 auto;
+}
 .user-list {
   margin-top: 2rem;
   list-style: none;
   flex-basis: 50%;
   max-width: 400px;
-  margin-right: auto;
+  margin-right: 3rem;
 }
 
 .user-page-content {
@@ -102,6 +107,6 @@ export default defineComponent({
   transition: background-color 0.2s;
 }
 .user-list-item:not(:last-child) {
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 </style>
