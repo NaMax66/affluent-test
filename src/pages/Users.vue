@@ -6,15 +6,16 @@
         <user-list-item
             class="user-list-item"
             @remove="onUserRemove"
-            @click="setActiveUser" v-for="user in userList"
+            v-for="user in userList"
             :user="user"
             :key="user.id"
+            @mouseover="setActiveUser(user)"
         />
         <li>
           <button @click="onAddUserClick">Add new user</button>
         </li>
       </ul>
-      <user-settings />
+      <user-settings :user="activeUser" />
     </div>
     <button @click="onTest">ChangeName</button>
   </div>
@@ -33,6 +34,10 @@ export default defineComponent({
     UserSettings,
     UserListItem
   },
+
+  data: () => ({
+    activeUser: {}
+  }),
 
   computed: {
     ...mapGetters('users', ['getUsers']),
@@ -56,6 +61,10 @@ export default defineComponent({
         username: 'Jerk'
       };
       this.changeUserData(user);
+    },
+
+    setActiveUser(user: User) {
+      this.activeUser = user;
     },
 
     onUserRemove(id: number) {

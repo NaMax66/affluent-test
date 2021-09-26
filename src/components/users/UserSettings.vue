@@ -14,20 +14,25 @@ import { User } from '@/specification/DTO/User';
 export default defineComponent({
   name: 'UserSettings',
   data: () => ({
-    name: null,
-    username: null,
-    email: null
+    name: '',
+    username: '',
+    email: ''
   }),
+
   props: {
     user: {
       type: Object as PropType<User>,
     }
   },
+
   watch: {
-    user(value) {
-      console.log(value);
+    user(user: User) {
+      this.name = user.name ? user.name : '';
+      this.username = user.username ? user.username : '';
+      this.email = user.email ? user.email : '';
     }
   },
+
   methods: {
     onAccept(e: InputEvent) {
       e.preventDefault();
