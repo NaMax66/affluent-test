@@ -1,5 +1,5 @@
 /**
 * Abstraction for http transport libraries. Like fetch, axios or XMLHttpRequest.
-* returns data or throw errors
+* It calls API methods and return eny result or throw errors
 */
 export default class HttpClient {}

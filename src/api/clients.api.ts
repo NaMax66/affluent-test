@@ -1,15 +1,20 @@
 // CRUD layer
 
 // enhancement: add error handling
+/*
+enhancement: add httpClient to make the transport system abstract.
+It need to have the ability change "fetch" method to 'axios' or 'XMLHttpRequest'
+*/
 
 import { User } from '@/specification/DTO/User';
-import errorHandler from '@/services/apiErrorHandler';
 import { ResponseStatus } from '@/specification/ResponseStatus';
 
-const url = 'https://jsonplaceholder.typicode.com/users';
+import errorHandler from '@/services/apiErrorHandler';
+
+const URL = 'https://jsonplaceholder.typicode.com/users';
 
 export const createUser = async (user: User) => {
-  const response = await fetch(url, {
+  const response = await fetch(URL, {
     method: 'POST',
     body: JSON.stringify(user),
     headers: {
@@ -23,16 +28,16 @@ export const createUser = async (user: User) => {
 };
 
 export const readUsers = async () => {
-  const response = await fetch(url);
+  const response = await fetch(URL);
   /* enhancement: add user list validation */
   const users: User[] = await response.json();
 
   return users;
 };
 
-
+/* enhancement: we cold use method: 'PATCH' for updating name only or e-mail. But for now to make it simple we change all user data */
 export const updateUser = async (user: User) => {
-  const response = await fetch(`${url}/${user.id}`, {
+  const response = await fetch(`${URL}/${user.id}`, {
     method: 'PUT',
     body: JSON.stringify(user),
     headers: {
@@ -43,10 +48,10 @@ export const updateUser = async (user: User) => {
   const returnedUser: User = await response.json();
 
   return returnedUser;
-}
+};
 
 export const deleteUser = async (id: number): Promise<ResponseStatus> => {
-  const response = await fetch(`${url}/${id}`, { method: 'DELETE'});
+  const response = await fetch(`${URL}/${id}`, { method: 'DELETE'});
 
   if (response.status === 200) {
     return 'success';
