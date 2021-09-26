@@ -1,4 +1,4 @@
-import { User } from '@/specification/DTO/users';
+import { User } from '@/specification/DTO/User';
 import { ActionContext } from 'vuex';
 
 export interface State {
@@ -12,6 +12,7 @@ export interface Getters {
 export interface Mutations {
   setList(state: State, users: User[]): void
   addUserToList(state: State, user: User): void
+  removeUserFromList(state: State, id: number): void
 }
 
 // explanation: use it because of native vuex 'commit' has 'any' type
@@ -30,5 +31,10 @@ export interface Actions {
   addUser(
     { commit }: AugmentedActionContext,
     user: User
+  ): Promise<void>
+
+  removeUserFromList(
+    { commit }: AugmentedActionContext,
+    id: number
   ): Promise<void>
 }

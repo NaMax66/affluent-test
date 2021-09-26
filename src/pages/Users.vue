@@ -2,8 +2,8 @@
   <div>
     <h1>Users page</h1>
     <ul class="user-list">
-      <user-list-item v-for="user in userList" :user="user" :key="user.id" />
-      <button @click="addUser(user)">Create</button>
+      <user-list-item @click="removeUserFromList(user.id)" v-for="user in userList" :user="user" :key="user.id" />
+      <button @click="onAddUserClick">Create</button>
     </ul>
   </div>
 </template>
@@ -12,17 +12,10 @@
 import { defineComponent } from 'vue';
 import { mapGetters, mapActions } from 'vuex';
 import UserListItem from '@/components/users/ListItem.vue';
-import { User } from '@/specification/DTO/users';
+import { User } from '@/specification/DTO/User';
 
 export default defineComponent({
   name: 'UsersPage',
-  data: () => ({
-    user: {
-      id: 555,
-      name: 'Bob',
-      username: 'Marley',
-    }
-  }),
   components: {
     UserListItem
   },
@@ -37,11 +30,21 @@ export default defineComponent({
   methods: {
     ...mapActions('users', [
         'fetchList',
-        'addUser'
+        'addUser',
+        'removeUserFromList'
     ]),
 
     fetchUserList() {
       this.fetchList();
+    },
+
+    onAddUserClick() {
+      const user: Omit<User, 'id'> = {
+        name: 'Bob',
+        username: 'Marley',
+      };
+
+      this.addUser(user);
     }
   },
 

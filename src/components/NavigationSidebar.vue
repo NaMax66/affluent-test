@@ -19,8 +19,8 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { RouteName } from '@/specification/routes';
-import { routes } from '@/specification/routes';
+import { RouteName } from '@/specification/Routes';
+import { routes } from '@/specification/Routes';
 
 export default defineComponent({
   name: "NavigationSidebar",

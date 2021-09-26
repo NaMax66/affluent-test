@@ -1,5 +1,5 @@
-import { RouteName } from '@/specification/routes';
-import { routes } from '@/specification/routes';
+import { RouteName } from '@/specification/Routes';
+import { routes } from '@/specification/Routes';
 
 const usersPageName: RouteName = 'users';
 

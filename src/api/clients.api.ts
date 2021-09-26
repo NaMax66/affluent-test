@@ -1,5 +1,10 @@
-// CRUD
-import { User } from '@/specification/DTO/users';
+// CRUD layer
+
+// enhancement: add error handling
+
+import { User } from '@/specification/DTO/User';
+import errorHandler from '@/services/apiErrorHandler';
+import { Status } from '@/specification/Status';
 
 const url = 'https://jsonplaceholder.typicode.com/users';
 
@@ -23,4 +28,15 @@ export const readUsers = async () => {
   const users: User[] = await response.json();
 
   return users;
-}
+};
+
+export const deleteUser = async (id: number): Promise<Status> => {
+  const response = await fetch(`${url}/${id}`, { method: 'DELETE'});
+
+  if (response.status === 200) {
+    return 'success';
+  } else {
+    errorHandler.reportUser(new Error('can\'t delete user with id: ' + id));
+    return 'error';
+  }
+};

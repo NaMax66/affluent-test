@@ -6,7 +6,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
-import { User } from '@/specification/DTO/users';
+import { User } from '@/specification/DTO/User';
 
 export default defineComponent({
   name: 'UserListItem',
