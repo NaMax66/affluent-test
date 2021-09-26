@@ -3,8 +3,8 @@ import users from '@/router/users';
 import comments from '@/router/comments';
 import photos from '@/router/photos';
 
-import { RouteName } from '@/specification/routes';
-import { routes } from '@/specification/routes';
+import { RouteName } from '@/specification/Routes';
+import { routes } from '@/specification/Routes';
 
 const MainPage = () => import('@/pages/Main.vue');
 const mainPageName: RouteName = 'mainPage';

@@ -1,15 +1,8 @@
 import { createStore } from 'vuex';
+import users from './modules/users/users';
 
 export const store = createStore({
-  state () {
-    return {
-      count: 0
-    };
-  },
-  mutations: {
-    increment (state) {
-      // @ts-ignore
-      state.count++;
-    }
+  modules: {
+    users
   }
 });

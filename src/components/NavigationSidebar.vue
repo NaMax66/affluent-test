@@ -19,8 +19,8 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { RouteName } from '@/specification/routes';
-import { routes } from '@/specification/routes';
+import { RouteName } from '@/specification/Routes';
+import { routes } from '@/specification/Routes';
 
 export default defineComponent({
   name: "NavigationSidebar",
@@ -35,12 +35,14 @@ export default defineComponent({
 <style scoped>
 .navigation-sidebar {
   width: 8rem;
-  height: 100vh;
+  min-height: 100vh;
   background-color: var(--c-black);
   padding: 1rem;
 }
 
 .navigation-list {
+  top: 1.5rem;
+  position: sticky;
   list-style: none;
 }
 
