@@ -15,7 +15,7 @@
           <button @click="onAddUserClick">Add new user</button>
         </li>
       </ul>
-      <user-settings :user="activeUser" />
+      <user-settings class="user-settings" :user="activeUser" />
     </div>
     <button @click="onTest">ChangeName</button>
   </div>
@@ -110,6 +110,7 @@ export default defineComponent({
 
 .user-page-content {
   display: flex;
+  align-items: flex-start;
 }
 
 .user-list-item {
@@ -117,5 +118,11 @@ export default defineComponent({
 }
 .user-list-item:not(:last-child) {
   margin-bottom: 0.5rem;
+}
+
+.user-settings {
+  margin-top: 2.5rem;
+  top: 2.5rem;
+  position: sticky;
 }
 </style>
