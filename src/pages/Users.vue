@@ -3,6 +3,7 @@
     <h1>Users page</h1>
     <ul class="user-list">
       <user-list-item v-for="user in userList" :user="user" :key="user.id" />
+      <button @click="addUser(user)">Create</button>
     </ul>
   </div>
 </template>
@@ -15,6 +16,13 @@ import { User } from '@/specification/DTO/users';
 
 export default defineComponent({
   name: 'UsersPage',
+  data: () => ({
+    user: {
+      id: 555,
+      name: 'Bob',
+      username: 'Marley',
+    }
+  }),
   components: {
     UserListItem
   },
@@ -28,7 +36,8 @@ export default defineComponent({
 
   methods: {
     ...mapActions('users', [
-        'fetchList'
+        'fetchList',
+        'addUser'
     ]),
 
     fetchUserList() {

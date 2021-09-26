@@ -6,11 +6,12 @@ export interface State {
 }
 
 export interface Getters {
-  getUsers(state: State): User[];
+  getUsers(state: State): User[]
 }
 
 export interface Mutations {
-  setList(state: State, payload: User[]): void;
+  setList(state: State, users: User[]): void
+  addUserToList(state: State, user: User): void
 }
 
 // explanation: use it because of native vuex 'commit' has 'any' type
@@ -18,11 +19,16 @@ interface AugmentedActionContext extends Omit<ActionContext<State, {}>, 'commit'
   commit<K extends keyof Mutations>(
     key: K,
     payload: Parameters<Mutations[K]>[1],
-  ): ReturnType<Mutations[K]>;
+  ): ReturnType<Mutations[K]>
 }
 
 export interface Actions {
   fetchList(
     { commit }: AugmentedActionContext
-  ): Promise<void>;
+  ): Promise<void>
+
+  addUser(
+    { commit }: AugmentedActionContext,
+    user: User
+  ): Promise<void>
 }
