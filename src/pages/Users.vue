@@ -9,10 +9,10 @@
             :user="user"
             :key="user.id"
             @edit="setActiveUser(user)"
-            @click="setActiveUser(user)"
+            @remove="onUserRemove"
         />
       </ul>
-      <user-settings @add-new-user="onAddNewUser" @remove="onUserRemove" @change-settings="onUserSettingsChange" class="user-settings" :user="activeUser" />
+      <user-settings @add-new-user="onAddNewUser" @change-settings="onUserSettingsChange" class="user-settings" :user="activeUser" />
     </div>
   </div>
 </template>
@@ -111,7 +111,7 @@ export default defineComponent({
 }
 
 .user-list-item:not(:last-child) {
-  margin-bottom: 0.5rem;
+  border-bottom: 1px solid var(--c-light-gray);
 }
 
 .user-settings {

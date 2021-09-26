@@ -8,6 +8,7 @@
       </div>
     </div>
     <button class="user-list-item__edit" @click="onEdit" title="remove user">Edit</button>
+    <button class="user-list-item__remove" @click="onRemove" title="remove user">X</button>
   </li>
 </template>
 
@@ -26,7 +27,12 @@ export default defineComponent({
   methods: {
     onEdit() {
       this.$emit('edit');
-    }
+    },
+
+    onRemove(e: InputEvent) {
+      e.preventDefault();
+      this.$emit('remove', this.user.id);
+    },
   }
 });
 </script>
@@ -39,14 +45,11 @@ export default defineComponent({
   align-items: center;
 }
 
-.user-list-item:hover {
-  background-color: var(--c-light-gray);
-}
-
 .user-list-item__name {
   margin-right: auto;
 }
 
+.user-list-item__remove,
 .user-list-item__edit {
   margin-left: 0.5rem;
   padding: 0 0.5rem;
