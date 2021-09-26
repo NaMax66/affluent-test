@@ -1,7 +1,13 @@
 <template>
   <li class="user-list-item">
-    <h4 class="user-list-item__name">{{ user.name }}</h4>
-    <button class="user-list-item__action" @click="onRemove" title="remove user">X</button>
+    <div class="user-list-item__name">
+      <h5>{{ user.username }}</h5>
+      <div class="additional-info">
+        <p>{{ user.email}}</p>
+        <p>{{ user.name}}</p>
+      </div>
+    </div>
+    <button class="user-list-item__edit" @click="onEdit" title="remove user">Edit</button>
   </li>
 </template>
 
@@ -18,8 +24,8 @@ export default defineComponent({
     }
   },
   methods: {
-    onRemove() {
-      this.$emit('remove', this.user.id);
+    onEdit() {
+      this.$emit('edit');
     }
   }
 });
@@ -30,6 +36,7 @@ export default defineComponent({
   display: flex;
   padding: 0.5rem;
   border-radius: 2px;
+  align-items: center;
 }
 
 .user-list-item:hover {
@@ -37,12 +44,15 @@ export default defineComponent({
 }
 
 .user-list-item__name {
-  margin-right: 1rem;
+  margin-right: auto;
 }
 
-.user-list-item__action {
-  width: 1.5rem;
+.user-list-item__edit {
+  margin-left: 0.5rem;
+  padding: 0 0.5rem;
   height: 1.5rem;
-  margin-left: auto;
+}
+.additional-info {
+  font-size: 0.8rem;
 }
 </style>

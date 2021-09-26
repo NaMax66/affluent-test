@@ -5,19 +5,15 @@
       <ul class="user-list">
         <user-list-item
             class="user-list-item"
-            @remove="onUserRemove"
             v-for="user in userList"
             :user="user"
             :key="user.id"
-            @mouseover="setActiveUser(user)"
+            @edit="setActiveUser(user)"
+            @click="setActiveUser(user)"
         />
-        <li>
-          <button @click="onAddUserClick">Add new user</button>
-        </li>
       </ul>
-      <user-settings class="user-settings" :user="activeUser" />
+      <user-settings @add-new-user="onAddNewUser" @remove="onUserRemove" @change-settings="onUserSettingsChange" class="user-settings" :user="activeUser" />
     </div>
-    <button @click="onTest">ChangeName</button>
   </div>
 </template>
 
@@ -43,7 +39,7 @@ export default defineComponent({
     ...mapGetters('users', ['getUsers']),
     userList(): User[] {
       return this.getUsers;
-    }
+    },
   },
 
   methods: {
@@ -54,34 +50,31 @@ export default defineComponent({
         'changeUserData'
     ]),
 
-    onTest() {
-      const user: User = {
-        id: 1,
-        name: 'Tommy',
-        username: 'Jerk'
-      };
+    onUserSettingsChange(user: User) {
       this.changeUserData(user);
+      this.clearActiveUser();
     },
 
     setActiveUser(user: User) {
       this.activeUser = user;
     },
 
+    clearActiveUser() {
+      this.activeUser = {};
+    },
+
     onUserRemove(id: number) {
       // enhancement: add preloader for user item. Or remove locally first then wait response and make decision
       this.removeUserFromList(id);
+      this.clearActiveUser();
     },
 
     fetchUserList() {
       this.fetchList();
     },
 
-    onAddUserClick() {
-      const user: Omit<User, 'id'> = {
-        name: 'Bob',
-        username: 'Marley',
-      };
-
+    onAddNewUser(user: Omit<User, 'id'>) {
+      this.clearActiveUser();
       this.addUser(user);
     }
   },
@@ -116,6 +109,7 @@ export default defineComponent({
 .user-list-item {
   transition: background-color 0.2s;
 }
+
 .user-list-item:not(:last-child) {
   margin-bottom: 0.5rem;
 }
@@ -125,4 +119,5 @@ export default defineComponent({
   top: 2.5rem;
   position: sticky;
 }
+
 </style>
