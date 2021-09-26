@@ -4,7 +4,7 @@
 
 import { User } from '@/specification/DTO/User';
 import errorHandler from '@/services/apiErrorHandler';
-import { Status } from '@/specification/Status';
+import { ResponseStatus } from '@/specification/ResponseStatus';
 
 const url = 'https://jsonplaceholder.typicode.com/users';
 
@@ -30,7 +30,22 @@ export const readUsers = async () => {
   return users;
 };
 
-export const deleteUser = async (id: number): Promise<Status> => {
+
+export const updateUser = async (user: User) => {
+  const response = await fetch(`${url}/${user.id}`, {
+    method: 'PUT',
+    body: JSON.stringify(user),
+    headers: {
+      'Content-type': 'application/json; charset=UTF-8',
+    },
+  });
+  /* enhancement: make sure that the object is really "User" type */
+  const returnedUser: User = await response.json();
+
+  return returnedUser;
+}
+
+export const deleteUser = async (id: number): Promise<ResponseStatus> => {
   const response = await fetch(`${url}/${id}`, { method: 'DELETE'});
 
   if (response.status === 200) {

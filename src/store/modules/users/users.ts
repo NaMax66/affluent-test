@@ -3,10 +3,10 @@ import { State, Getters, Mutations, Actions } from './types';
 
 import { User } from '@/specification/DTO/User';
 
-import { readUsers, createUser, deleteUser } from '@/api/clients.api';
+import { createUser, readUsers, updateUser, deleteUser } from '@/api/clients.api';
 
 import errorHandler from '@/services/apiErrorHandler';
-import { Status } from '@/specification/Status';
+import { ResponseStatus } from '@/specification/ResponseStatus';
 
 const state: State = {
   userList: []
@@ -27,6 +27,18 @@ const mutations: MutationTree<State> & Mutations = {
 
   removeUserFromList(state: State, id: number) {
     state.userList = state.userList.filter(user => user.id !== id);
+  },
+
+  replaceUserInList(state: State, user: User) {
+    const userIndex = state.userList.findIndex(listUser => listUser.id === user.id);
+
+    if (userIndex !== -1) {
+      state.userList = [
+        ...state.userList.slice(0, userIndex),
+        user,
+        ...state.userList.slice(userIndex + 1),
+      ];
+    }
   }
 };
 
@@ -44,10 +56,18 @@ const actions: ActionTree<State, {}> & Actions = {
   },
 
   async removeUserFromList({ commit }, id: number): Promise<void> {
-      const result: Status = await deleteUser(id);
+      const result: ResponseStatus = await deleteUser(id);
       if (result === 'success') {
         commit('removeUserFromList', id);
       }
+  },
+
+  async changeUserData({ commit }, user: User): Promise<void> {
+    const returnedUser = await updateUser(user);
+
+    if (returnedUser.id === user.id) {
+      commit('replaceUserInList', returnedUser);
+    }
   }
 };
 

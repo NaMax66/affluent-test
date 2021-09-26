@@ -4,6 +4,7 @@
     <ul class="user-list">
       <user-list-item @click="removeUserFromList(user.id)" v-for="user in userList" :user="user" :key="user.id" />
       <button @click="onAddUserClick">Create</button>
+      <button @click="onTest">ChangeName</button>
     </ul>
   </div>
 </template>
@@ -31,8 +32,18 @@ export default defineComponent({
     ...mapActions('users', [
         'fetchList',
         'addUser',
-        'removeUserFromList'
+        'removeUserFromList',
+        'changeUserData'
     ]),
+
+    onTest() {
+      const user: User = {
+        id: 1,
+        name: 'Tommy',
+        username: 'Jerk'
+      };
+      this.changeUserData(user);
+    },
 
     fetchUserList() {
       this.fetchList();

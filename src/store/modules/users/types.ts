@@ -13,6 +13,7 @@ export interface Mutations {
   setList(state: State, users: User[]): void
   addUserToList(state: State, user: User): void
   removeUserFromList(state: State, id: number): void
+  replaceUserInList(state: State, user: User): void
 }
 
 // explanation: use it because of native vuex 'commit' has 'any' type
@@ -36,5 +37,10 @@ export interface Actions {
   removeUserFromList(
     { commit }: AugmentedActionContext,
     id: number
+  ): Promise<void>
+
+  changeUserData(
+    { commit }: AugmentedActionContext,
+    user: User
   ): Promise<void>
 }
