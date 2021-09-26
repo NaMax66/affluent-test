@@ -1,12 +1,9 @@
 import { GetterTree, MutationTree, ActionTree } from 'vuex';
 import { State, Getters, Mutations, Actions } from './types';
-
 import { User } from '@/specification/DTO/User';
+import { ResponseStatus } from '@/specification/ResponseStatus';
 
 import { createUser, readUsers, updateUser, deleteUser } from '@/api/clients.api';
-
-import errorHandler from '@/services/apiErrorHandler';
-import { ResponseStatus } from '@/specification/ResponseStatus';
 
 const state: State = {
   userList: []
