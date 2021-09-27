@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import users from '@/router/users';
-import comments from '@/router/comments';
-import photos from '@/router/photos';
+import comments from '@/router/posts';
 
 import { RouteName } from '@/specification/Routes';
 import { routes } from '@/specification/Routes';
@@ -20,7 +19,6 @@ export const router = createRouter({
   routes: [
     mainPageRoute,
     ...users,
-    ...comments,
-    ...photos
+    ...comments
   ]
 });

@@ -1,7 +1,7 @@
 export const routes = {
     mainPage: '/',
     photos: '/photos',
-    comments: '/comments',
+    posts: '/posts',
     users: '/users'
   } as const;
 
