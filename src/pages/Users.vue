@@ -1,6 +1,9 @@
 <template>
   <div class="page-users">
     <h1>Users page</h1>
+    <div>
+      <input v-model="userNameQuery" class="user-filtering" type="text" placeholder="filter users by name">
+    </div>
     <div class="user-page-content">
       <ul class="user-list">
         <template v-if="isListLoading">
@@ -46,13 +49,16 @@ export default defineComponent({
 
   data: () => ({
     isListLoading: false,
+    userNameQuery: '',
     activeUser: {}
   }),
 
   computed: {
     ...mapGetters('users', ['getUsers']),
     userList(): User[] {
-      return this.getUsers;
+      return this.getUsers.filter(
+          (user: User) => String(user.name).toLocaleLowerCase().startsWith(this.userNameQuery)
+      );
     },
   },
 

@@ -1,10 +1,10 @@
 <template>
   <li class="user-list-item">
     <div class="user-list-item__name">
-      <h5>{{ user.username }}</h5>
+      <h5>{{ user.name }}</h5>
       <div class="additional-info">
         <p>{{ user.email}}</p>
-        <p>{{ user.name}}</p>
+        <p>{{ user.phone }}</p>
       </div>
     </div>
     <button class="user-list-item__edit" @click="onEdit" title="remove user">Edit</button>
