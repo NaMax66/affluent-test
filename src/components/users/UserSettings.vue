@@ -1,10 +1,11 @@
 <template>
   <form class="user-settings" @keydown.enter="onEnter">
-    <input ref="username" class="user-settings__input" placeholder="login" v-model="username" />
-    <input class="user-settings__input" placeholder="name" v-model="name" />
-    <input class="user-settings__input" placeholder="e-mail" v-model="email" />
+    <!-- enhancement: Add universal input adding. To make it easy to add and change field that needed -->
+    <input ref="name" class="user-settings__input" placeholder="name" v-model="name" />
+    <input class="user-settings__input" placeholder="email" v-model="email" />
+    <input class="user-settings__input" placeholder="phone" v-model="phone" />
     <div class="user-settings__controls">
-      <button class="user-settings__accept" @click="onAccept">Apply Change</button>
+      <button :disabled="!isApplyChangeActive" class="user-settings__accept" @click="onAccept">Apply Change</button>
     </div>
     <div class="user-settings__add-new">
       <button class="add-new-user-button" @click="onAddUserClick">Add new user</button>
@@ -20,8 +21,8 @@ export default defineComponent({
   name: 'UserSettings',
   data: () => ({
     name: '',
-    username: '',
-    email: ''
+    email: '',
+    phone: ''
   }),
 
   props: {
@@ -33,9 +34,16 @@ export default defineComponent({
   watch: {
     user(user: User) {
       this.name = user.name ? user.name : '';
-      this.username = user.username ? user.username : '';
       this.email = user.email ? user.email : '';
+      this.phone = user.phone ? user.phone : '';
     }
+  },
+
+  computed: {
+    isApplyChangeActive(): boolean {
+      /* explanation: when no active user provided - nothing to change */
+      return !!this.user?.id;
+    },
   },
 
   methods: {
@@ -43,23 +51,23 @@ export default defineComponent({
       e.preventDefault();
     },
 
-    focusOnUsername() {
+    focusOnName() {
+      // enhancement: add ref check and remove ts-ignore
       /* @ts-ignore */
-      this.$refs.username.focus();
+      this.$refs.name.focus();
     },
 
     onAddUserClick(e: InputEvent) {
       e.preventDefault();
-      if (!this.username) {
-        this.focusOnUsername();
+      if (!this.name) {
+        this.focusOnName();
         return;
       }
 
-      const newUser: User = {
-        id: Math.floor(Math.random() * 1000000),
+      const newUser: Omit<User, 'id'> = {
         name: this.name,
-        username: this.username,
-        email: this.email
+        email: this.email,
+        phone: this.phone
       };
 
       this.$emit('add-new-user', newUser);
@@ -69,16 +77,16 @@ export default defineComponent({
 
     clearForm() {
       this.name = '';
-      this.username = '';
       this.email = '';
+      this.phone = '';
     },
 
     onAccept(e: InputEvent) {
       e.preventDefault();
       const newUser = Object.assign(this.user, {
         name: this.name,
-        username: this.username,
-        email: this.email
+        email: this.email,
+        phone: this.phone
       });
 
       this.$emit('change-settings', newUser);

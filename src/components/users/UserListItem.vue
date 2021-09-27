@@ -1,14 +1,16 @@
 <template>
   <li class="user-list-item">
     <div class="user-list-item__name">
-      <h5>{{ user.username }}</h5>
+      <h5>{{ user.name }}</h5>
       <div class="additional-info">
-        <p>{{ user.email}}</p>
-        <p>{{ user.name}}</p>
+        <p>e-mail: {{ user.email}}</p>
+        <p>phone: {{ user.phone }}</p>
       </div>
     </div>
-    <button class="user-list-item__edit" @click="onEdit" title="remove user">Edit</button>
-    <button class="user-list-item__remove" @click="onRemove" title="remove user">X</button>
+    <div class="user-list-item__controls">
+      <button class="user-list-item__edit" @click="onEdit" title="remove user">Edit</button>
+      <button class="user-list-item__remove" @click="onRemove" title="remove user">X</button>
+    </div>
   </li>
 </template>
 
@@ -40,9 +42,24 @@ export default defineComponent({
 <style scoped>
 .user-list-item {
   display: flex;
-  padding: 0.5rem;
+  padding: 0.5rem 0;
   border-radius: 2px;
   align-items: center;
+}
+
+.user-list-item__controls {
+  visibility: hidden;
+  opacity: 0;
+  transition: 0.2s;
+}
+
+.user-list-item__controls {
+
+}
+
+.user-list-item:hover > .user-list-item__controls {
+  visibility: visible;
+  opacity: 1;
 }
 
 .user-list-item__name {

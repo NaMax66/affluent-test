@@ -1,18 +1,34 @@
 <template>
   <div class="page-users">
     <h1>Users page</h1>
+    <div>
+      <input v-model="userNameQuery" class="user-filter-input" type="text" placeholder="filter users by name">
+    </div>
     <div class="user-page-content">
       <ul class="user-list">
-        <user-list-item
-            class="user-list-item"
-            v-for="user in userList"
-            :user="user"
-            :key="user.id"
-            @edit="setActiveUser(user)"
-            @remove="onUserRemove"
-        />
+        <template v-if="isListLoading">
+          <!-- enhancement: add skeleton loader -->
+          <li>
+            <p class="preloader">Loading...</p>
+          </li>
+        </template>
+        <template v-else>
+          <user-list-item
+              class="user-list-item"
+              v-for="user in userList"
+              :user="user"
+              :key="user.id"
+              @edit="setActiveUser(user)"
+              @remove="onUserRemove"
+          />
+        </template>
       </ul>
-      <user-settings @add-new-user="onAddNewUser" @change-settings="onUserSettingsChange" class="user-settings" :user="activeUser" />
+      <user-settings
+          @add-new-user="onAddNewUser"
+          @change-settings="onUserSettingsChange"
+          class="user-settings"
+          :user="activeUser"
+      />
     </div>
   </div>
 </template>
@@ -32,13 +48,17 @@ export default defineComponent({
   },
 
   data: () => ({
+    isListLoading: false,
+    userNameQuery: '',
     activeUser: {}
   }),
 
   computed: {
     ...mapGetters('users', ['getUsers']),
     userList(): User[] {
-      return this.getUsers;
+      return this.getUsers.filter(
+          (user: User) => String(user.name).toLocaleLowerCase().startsWith(this.userNameQuery)
+      );
     },
   },
 
@@ -69,8 +89,10 @@ export default defineComponent({
       this.clearActiveUser();
     },
 
-    fetchUserList() {
-      this.fetchList();
+    async fetchUserList() {
+      this.isListLoading = true;
+      await this.fetchList();
+      this.isListLoading = false;
     },
 
     onAddNewUser(user: Omit<User, 'id'>) {
@@ -89,16 +111,38 @@ export default defineComponent({
 
 <style scoped>
 .page-users {
+  --left-column-max-width: 400px;
+
   width: 100%;
   max-width: var(--width-max-desktop);
   margin: 0 auto;
 }
+
+
+.user-filter-input {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  margin-top: 1rem;
+  max-width: var(--left-column-max-width);
+}
+
+.preloader {
+  font-size: 2rem;
+}
+
 .user-list {
   margin-top: 2rem;
   list-style: none;
-  flex-basis: 50%;
-  max-width: 400px;
+  width: 50%;
+  max-width: var(--left-column-max-width);
   margin-right: 3rem;
+}
+
+@media (max-width: 768px) {
+  .user-list {
+    width: 100%;
+    max-width: var(--left-column-max-width);
+  }
 }
 
 .user-page-content {
@@ -106,8 +150,11 @@ export default defineComponent({
   align-items: flex-start;
 }
 
-.user-list-item {
-  transition: background-color 0.2s;
+/* enhancement: add some scc framework to use variables in media queries */
+@media (max-width: 768px) {
+  .user-page-content {
+    flex-direction: column-reverse;
+  }
 }
 
 .user-list-item:not(:last-child) {
@@ -115,9 +162,18 @@ export default defineComponent({
 }
 
 .user-settings {
-  margin-top: 2.5rem;
-  top: 2.5rem;
   position: sticky;
+  top: 2.5rem;
+  margin-top: 2.5rem;
 }
 
+@media (max-width: 768px) {
+  .user-settings {
+    width: 100%;
+    max-width: var(--left-column-max-width);
+    margin-top: 1rem;
+    position: relative;
+    top: 0;
+  }
+}
 </style>
