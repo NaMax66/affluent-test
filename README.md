@@ -1,6 +1,7 @@
 # Affluent-Test
 
 - The test task for [Affluent] company
+- Temporarry avaliable on https://namax66.github.io/
 
 ## Information
 
