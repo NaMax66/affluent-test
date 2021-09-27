@@ -3,16 +3,29 @@
     <h1>Users page</h1>
     <div class="user-page-content">
       <ul class="user-list">
-        <user-list-item
-            class="user-list-item"
-            v-for="user in userList"
-            :user="user"
-            :key="user.id"
-            @edit="setActiveUser(user)"
-            @remove="onUserRemove"
-        />
+        <template v-if="isListLoading">
+          <!-- enhancement: add skeleton loader -->
+          <li>
+            <p class="preloader">Loading...</p>
+          </li>
+        </template>
+        <template v-else>
+          <user-list-item
+              class="user-list-item"
+              v-for="user in userList"
+              :user="user"
+              :key="user.id"
+              @edit="setActiveUser(user)"
+              @remove="onUserRemove"
+          />
+        </template>
       </ul>
-      <user-settings @add-new-user="onAddNewUser" @change-settings="onUserSettingsChange" class="user-settings" :user="activeUser" />
+      <user-settings
+          @add-new-user="onAddNewUser"
+          @change-settings="onUserSettingsChange"
+          class="user-settings"
+          :user="activeUser"
+      />
     </div>
   </div>
 </template>
@@ -32,6 +45,7 @@ export default defineComponent({
   },
 
   data: () => ({
+    isListLoading: false,
     activeUser: {}
   }),
 
@@ -69,8 +83,10 @@ export default defineComponent({
       this.clearActiveUser();
     },
 
-    fetchUserList() {
-      this.fetchList();
+    async fetchUserList() {
+      this.isListLoading = true;
+      await this.fetchList();
+      this.isListLoading = false;
     },
 
     onAddNewUser(user: Omit<User, 'id'>) {
@@ -92,6 +108,10 @@ export default defineComponent({
   width: 100%;
   max-width: var(--width-max-desktop);
   margin: 0 auto;
+}
+
+.preloader {
+  font-size: 2rem;
 }
 .user-list {
   margin-top: 2rem;
