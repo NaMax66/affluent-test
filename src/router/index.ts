@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import users from '@/router/users';
-import comments from '@/router/comments';
+import comments from '@/router/posts';
 import photos from '@/router/photos';
 
 import { RouteName } from '@/specification/Routes';

@@ -57,7 +57,7 @@ export default defineComponent({
     ...mapGetters('users', ['getUsers']),
     userList(): User[] {
       return this.getUsers.filter(
-          (user: User) => String(user.name).toLocaleLowerCase().startsWith(this.userNameQuery)
+          (user: User) => String(user.name).toLocaleLowerCase().startsWith(this.userNameQuery.toLowerCase())
       );
     },
   },

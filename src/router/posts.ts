@@ -1,14 +1,14 @@
 import { RouteName } from '@/specification/Routes';
 import { routes } from '@/specification/Routes';
 
-const commentsPageName: RouteName = 'comments';
+const commentsPageName: RouteName = 'posts';
 
-const CommentsPage = () => import('@/pages/Comments.vue');
+const PostsPage = () => import('@/pages/Posts.vue');
 
 export default [
   {
     path: routes[commentsPageName],
     name: commentsPageName,
-    component: CommentsPage
+    component: PostsPage
   }
 ];

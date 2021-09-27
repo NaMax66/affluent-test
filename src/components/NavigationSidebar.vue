@@ -8,7 +8,7 @@
         <router-link class="router-link" active-class="router-link--active" :to="getLinkByRouteName('users')">users</router-link>
       </li>
       <li class="navigation-list__item">
-      <router-link class="router-link" active-class="router-link--active" :to="getLinkByRouteName('comments')">comments</router-link>
+      <router-link class="router-link" active-class="router-link--active" :to="getLinkByRouteName('posts')">posts</router-link>
       </li>
       <li class="navigation-list__item">
       <router-link class="router-link" active-class="router-link--active" :to="getLinkByRouteName('photos')">photos</router-link>
