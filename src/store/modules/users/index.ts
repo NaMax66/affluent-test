@@ -5,6 +5,8 @@ import { ResponseStatus } from '@/specification/ResponseStatus';
 
 import { createUser, readUsers, updateUser, deleteUser } from '@/api/clients.api';
 
+import replaceItemInArray from '@/tools/replaceItemInArray';
+
 const state: State = {
   userList: []
 };
@@ -27,15 +29,7 @@ const mutations: MutationTree<State> & Mutations = {
   },
 
   replaceUserInList(state: State, user: User) {
-    const userIndex = state.userList.findIndex(listUser => listUser.id === user.id);
-
-    if (userIndex !== -1) {
-      state.userList = [
-        ...state.userList.slice(0, userIndex),
-        user,
-        ...state.userList.slice(userIndex + 1),
-      ];
-    }
+    state.userList = replaceItemInArray(state.userList, user);
   }
 };
 
