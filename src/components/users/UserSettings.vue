@@ -51,7 +51,7 @@ export default defineComponent({
       e.preventDefault();
     },
 
-    focusOnUsername() {
+    focusOnName() {
       // enhancement: add ref check and remove ts-ignore
       /* @ts-ignore */
       this.$refs.name.focus();
@@ -59,8 +59,8 @@ export default defineComponent({
 
     onAddUserClick(e: InputEvent) {
       e.preventDefault();
-      if (!this.email) {
-        this.focusOnUsername();
+      if (!this.name) {
+        this.focusOnName();
         return;
       }
 

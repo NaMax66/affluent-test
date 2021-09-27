@@ -53,13 +53,6 @@ export default defineComponent({
   transition: 0.2s;
 }
 
-@media (max-width: 768px){
-  .user-list-item__controls {
-    visibility: visible;
-    opacity: 1;
-  }
-}
-
 .user-list-item__controls {
 
 }

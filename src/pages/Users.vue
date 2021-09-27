@@ -133,9 +133,16 @@ export default defineComponent({
 .user-list {
   margin-top: 2rem;
   list-style: none;
-  flex-basis: 50%;
+  width: 50%;
   max-width: var(--left-column-max-width);
   margin-right: 3rem;
+}
+
+@media (max-width: 768px) {
+  .user-list {
+    width: 100%;
+    max-width: var(--left-column-max-width);
+  }
 }
 
 .user-page-content {
@@ -143,14 +150,30 @@ export default defineComponent({
   align-items: flex-start;
 }
 
+/* enhancement: add some scc framework to use variables in media queries */
+@media (max-width: 768px) {
+  .user-page-content {
+    flex-direction: column-reverse;
+  }
+}
+
 .user-list-item:not(:last-child) {
   border-bottom: 1px solid var(--c-light-gray);
 }
 
 .user-settings {
-  margin-top: 2.5rem;
-  top: 2.5rem;
   position: sticky;
+  top: 2.5rem;
+  margin-top: 2.5rem;
 }
 
+@media (max-width: 768px) {
+  .user-settings {
+    width: 100%;
+    max-width: var(--left-column-max-width);
+    margin-top: 1rem;
+    position: relative;
+    top: 0;
+  }
+}
 </style>
