@@ -5,7 +5,7 @@ The format is based on [keepachangelog.com]
 
 [keepachangelog.com]:https://keepachangelog.com/en/1.0.0/
 
-## Unreleased
+## [0.1.0] - 2021-09-27
 
 ### Added
 
@@ -22,3 +22,4 @@ The format is based on [keepachangelog.com]
 - simple navbar with active `users` and `mainPage` routs
 
 [0.0.1]: https://github.com/NaMax66/affluent-test/releases/tag/v0.0.1
+[0.1.0]: https://github.com/NaMax66/affluent-test/compare/v0.0.1...v0.1.0
