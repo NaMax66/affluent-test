@@ -9,7 +9,7 @@ The format is based on [keepachangelog.com]
 
 ### Added
 
-- search field for users page
+- filtering for users page
 
 ## [0.1.0] - 2021-09-27
 
