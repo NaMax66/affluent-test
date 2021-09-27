@@ -2,7 +2,7 @@
   <div class="page-users">
     <h1>Users page</h1>
     <div>
-      <input v-model="userNameQuery" class="user-filtering" type="text" placeholder="filter users by name">
+      <input v-model="userNameQuery" class="user-filter-input" type="text" placeholder="filter users by name">
     </div>
     <div class="user-page-content">
       <ul class="user-list">
@@ -111,29 +111,36 @@ export default defineComponent({
 
 <style scoped>
 .page-users {
+  --left-column-max-width: 400px;
+
   width: 100%;
   max-width: var(--width-max-desktop);
   margin: 0 auto;
 }
 
+
+.user-filter-input {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  margin-top: 1rem;
+  max-width: var(--left-column-max-width);
+}
+
 .preloader {
   font-size: 2rem;
 }
+
 .user-list {
   margin-top: 2rem;
   list-style: none;
   flex-basis: 50%;
-  max-width: 400px;
+  max-width: var(--left-column-max-width);
   margin-right: 3rem;
 }
 
 .user-page-content {
   display: flex;
   align-items: flex-start;
-}
-
-.user-list-item {
-  transition: background-color 0.2s;
 }
 
 .user-list-item:not(:last-child) {
