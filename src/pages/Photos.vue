@@ -1,5 +1,4 @@
-<template>
-  <div>
+<template>  <div>
     <h1>Photos page</h1>
     <list-default />
   </div>

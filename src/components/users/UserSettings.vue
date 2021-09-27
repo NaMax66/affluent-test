@@ -5,10 +5,10 @@
     <input class="user-settings__input" placeholder="email" v-model="email" />
     <input class="user-settings__input" placeholder="phone" v-model="phone" />
     <div class="user-settings__controls">
-      <button :disabled="!isApplyChangeActive" class="user-settings__accept" @click="onAccept">Apply Change</button>
+      <button :disabled="!isExistUserEditing" class="user-settings__accept" @click.prevent="acceptChangeHandler">Apply Change</button>
     </div>
     <div class="user-settings__add-new">
-      <button class="add-new-user-button" @click="onAddUserClick">Add new user</button>
+      <button :disabled="isExistUserEditing" class="add-new-user-button" @click.prevent="addUserHandler">Add new user</button>
     </div>
   </form>
 </template>
@@ -40,7 +40,7 @@ export default defineComponent({
   },
 
   computed: {
-    isApplyChangeActive(): boolean {
+    isExistUserEditing(): boolean {
       /* explanation: when no active user provided - nothing to change */
       return !!this.user?.id;
     },
@@ -49,6 +49,12 @@ export default defineComponent({
   methods: {
     onEnter(e: Event) {
       e.preventDefault();
+
+      if (this.isExistUserEditing) {
+        this.acceptChangeHandler();
+      } else {
+        this.addUserHandler();
+      }
     },
 
     focusOnName() {
@@ -57,8 +63,7 @@ export default defineComponent({
       this.$refs.name.focus();
     },
 
-    onAddUserClick(e: InputEvent) {
-      e.preventDefault();
+    addUserHandler() {
       if (!this.name) {
         this.focusOnName();
         return;
@@ -81,15 +86,16 @@ export default defineComponent({
       this.phone = '';
     },
 
-    onAccept(e: InputEvent) {
-      e.preventDefault();
-      const newUser = Object.assign(this.user, {
+    acceptChangeHandler() {
+      const user = {
+        /* enhancement: Add deep clone. Some field could contain nested objects. */
+        ...this.user,
         name: this.name,
         email: this.email,
         phone: this.phone
-      });
+      };
 
-      this.$emit('change-settings', newUser);
+      this.$emit('change-settings', user);
     },
   }
 });
