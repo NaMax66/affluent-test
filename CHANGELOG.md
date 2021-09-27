@@ -10,6 +10,7 @@ The format is based on [keepachangelog.com]
 ### Added
 
 - read and show data for posts page
+- `Jest` as a test framework
 
 ## [0.2.0] - 2021-09-27
 
