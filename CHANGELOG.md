@@ -5,6 +5,12 @@ The format is based on [keepachangelog.com]
 
 [keepachangelog.com]:https://keepachangelog.com/en/1.0.0/
 
+## Unreleased
+
+### Added
+
+- read and show data for posts page
+
 ## [0.2.0] - 2021-09-27
 
 ### Added

@@ -4,7 +4,15 @@
     <!-- enhancement: add post list filtration by userId -->
     <div>
       <ul class="post-list">
-        <post-list-item class="post-list-item" v-for="post in postList" :post="post" :key="post.id" />
+        <template v-if="isListLoading">
+          <!-- enhancement: add skeleton loader -->
+          <li>
+            <p class="preloader">Loading...</p>
+          </li>
+        </template>
+        <template v-else>
+          <post-list-item class="post-list-item" v-for="post in postList" :post="post" :key="post.id" />
+        </template>
       </ul>
     </div>
   </div>
@@ -65,5 +73,9 @@ export default defineComponent({
 .post-list-item:not(:last-child) {
   margin-bottom: 1rem;
   border-bottom: 1px solid var(--c-light-gray);
+}
+
+.preloader {
+  font-size: 2rem;
 }
 </style>
